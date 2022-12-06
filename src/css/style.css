@@ -1,0 +1,650 @@
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section,summary {
+  display: block;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body{
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.8rem;
+}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-size: 62.5%;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+
+
+button, input {
+  line-height: normal;
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+
+button[disabled], input[disabled] {
+  cursor: default;
+}
+
+button,
+input[type=submit] {
+  text-transform: uppercase;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: #f00;
+  color: #fff;
+  font-size: 1.4rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
+}
+button[disabled], input[type=submit][disabled] {
+  color: #d12028;
+  background: #fff;
+  -webkit-transform: rotate(-10deg) scale(1.5) translateX(40%) translateY(-50%);
+          transform: rotate(-10deg) scale(1.5) translateX(40%) translateY(-50%);
+  border: 1px solid #d12028;
+}
+button[disabled]:hover,input[type=submit][disabled]:hover {
+  color: #d12028;
+  cursor: not-allowed;
+}
+button[disabled]:after, input[type=submit][disabled]:after {
+  display: none;
+}
+button:after, input[type=submit]:after {
+  content: '';
+  z-index: -1;
+  display: block;
+  background: #000;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+button:hover, input[type=submit]:hover, button:focus,
+input[type=submit]:focus {
+  color: #fff;
+  outline: 0;
+}
+button:hover:after, input[type=submit]:hover:after, button:focus:after, input[type=submit]:focus:after {
+  width: 100%;
+}
+
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+  margin: 0;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 3rem;
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+
+
+/*--------------------------------------RESTAURANT PAGE------------------------------------------------------------------------------------------*/
+.restaurant_select {                    
+  background-color: #c0c0c0;
+  max-width: 600px;
+  margin: 200px auto;
+  margin-top: 100px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 0 0 10px rgba(255,255,255,0.1), 0 0 10px rgba(0,0,0,0.18);
+}
+.restaurant_select_top {                   
+  position: relative;
+  max-width: 550x;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  background-color:lightcyan;
+}
+.restaurant_select_top-header {        
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.4;
+  cursor: pointer;
+
+}
+.restaurant_select button {
+  margin-top: 10px;
+}
+.restaurant_select .arrow_picker {      
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding-top: 2px;
+  width: 14px;
+ 
+}
+.restaurant_select .arrow_picker-up {       
+  background: url("images/up.svg") no-repeat;
+  background-size: auto;
+  background-size: 100% auto;
+  width: 13px;
+  height: 12px;
+  top: 0;
+  cursor: pointer;
+  margin-bottom: 5px;
+ 
+}
+.restaurant_select .arrow_picker-down {      
+  background: url("images/down.svg") no-repeat;
+  background-size: auto;
+  background-size: 100% auto;
+  width: 13px;
+  height: 12px;
+  cursor: pointer;
+
+}
+.restaurant_select_bottom {  
+  position: absolute;
+  padding: 10px 20px;
+  border: 2px solid #000;
+  top: 85px;
+  left: 40px;
+  min-width: 400px;
+  background: lightblue;
+}
+.restaurant_select_bottom ul {
+  padding: 0 0 0 10px;
+}
+.restaurant_select_bottom ul li {
+  cursor: pointer;
+  list-style: none;
+  padding: 5px 0;
+  height:50px;
+}
+.restaurant_select_bottom ul li::before {
+  content: '■';
+  margin-right: 0.5rem;
+  color: #f00;
+}
+
+
+
+
+
+/* -------------------------------------BURGER ORDER PAGE --------------------------------------------------------------------------------*/
+.burger-paradise {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr;
+  grid-gap: 10px;
+  height: 94vh;
+  max-width: 1500px;
+  margin: 0 auto;
+  margin-top: 2vh;
+}
+.burger-paradise > * {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: solid 1px yellow;
+  padding-bottom : 0px;
+}
+.burger-paradise > *:first-child {
+  background: rgb(246, 247, 247);
+}
+.burger-paradise > *:nth-child(2) {
+  padding: 2rem 0;;
+  border-radius: 4px;
+}
+.burger-paradise > *:last-child {
+  background: rgb(119, 230, 119);
+  padding: 2rem;
+}
+.menu-burger {
+  display: grid;
+  grid-template-columns: 150px 300px 50px;
+  grid-template-rows: 50;
+  gap: 50 px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+}
+.menu-burger p {
+  margin: 5px 0;
+  font-size: 1.6rem;
+}
+.menu-burger .burger-name {
+  margin: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: large;
+  font-style: italic;
+  color:#2dc22d
+         
+}
+.menu-burger .price {
+  font-size: 2rem;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bolder;
+  margin-left: 100px;
+  float:right;
+  
+}
+
+.menu-burger .img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.body
+{
+  background: url("images/BURGER BLAST.jpg") center no-repeat ;
+ background-size: contain;                                                
+  
+  color: #fff;
+}
+header.top {
+  
+}
+
+header.top .header-content {
+  height: 290px;
+  width: 80%;
+
+}
+header.top .header-content .header-rating {
+  padding: 4px 8px;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #ffe033;
+  display: -webkit-inline-box;
+  display: inline-flex;
+  border-radius: 18px;
+  -webkit-box-align: center;
+          align-items: center;
+  font-size: 1.4rem;
+  background-color: red;
+  
+}
+header.top .header-content .header-rating .header-rating_tag {
+  color: #000;
+  margin-right: 5px;
+}
+header.top .header-content .header-divider {
+  height: 1px;
+  opacity: 0.2;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  background-color: #fff;
+}
+@media (max-width: 0px) {
+  header.top .header-content h1 {
+    font-size: 1rem;
+    margin-left: 30% ;
+    /* color:rgb(235, 242, 19); */
+    font-weight: bolder;
+    display:block;
+    background-color: #4f4b4b;
+    padding:20px;
+    border-radius: 15%;
+  }
+}
+header.top .header-content h1 {
+  font-size: 5rem;
+  margin-left: 30% ;
+  color:rgb(235, 242, 19);
+  font-weight: bolder;
+  display:block;
+  background-color: #4f4b4b;
+  padding:20px;
+  border-radius: 15%;
+}
+header.top .header-content h3 {
+  margin: 0;  
+  font-size: 3rem;
+  color:blue;
+  align-content: center;
+  margin-left:30%;
+  margin-top: 3%;
+  background-color: #4f4b4b;
+  padding:5px;  
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 1px solid #000;
+  
+}
+ul.order li {
+  padding: 2rem 0 2rem 0.2rem;
+  font-size: 1.4rem;
+  background-color: rgb(208, 244, 244);
+  display:grid;
+  grid-template-columns: 2fr 4fr 1fr;
+
+        
+}
+
+ul.order li img
+{
+  margin-left: 10px;
+  max-height:100px;
+  max-width: 100px;
+}
+
+.total {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  border-bottom: 3px solid #000;
+  border-top: 3px double #000;
+}
+.price {
+  font-size: 2rem;
+  margin-right: 0px;
+  margin-top: 2%;
+  float:right;
+  margin-right: 20px;
+}
+.name{
+  font-size: medium;
+  font-weight: 600;
+  font-style: oblique;
+  color:blue;
+  margin-top: 2%;
+ 
+}
+ul.order li button {
+  border: 0;
+  
+  line-height: 1;
+  padding: 0 4px;
+  background: transparent;
+  color: #f00;
+  cursor:pointer;
+  margin-left: 30px;
+  font-size: 30px;
+}
+ul.order li button:after {
+  display: none;
+}
+.placed
+{
+  padding-top: 10%;
+  padding-left: 25%;
+}
+
+/* _____________________________________________________________________________DOUBT________________________________________________ */
+
+
+
+ul.order li span.count {
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+ul.order li span.count span {
+  display: inline-block;
+}
+.nothingSelected {
+  text-align: center;
+  margin: 0 10px;
+}
+
+.order-title {
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------LOG IN PAGE AND SIGN IN PAGE-------------------------------------------------------------------*/
+
+body .login {
+  background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Open Sans", sans-serif;
+  color: #333333;
+}
+
+.box-form {
+  margin: 0 auto;
+  width: 80%;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: stretch;
+  justify-content: space-between;
+  box-shadow: 0 0 20px 6px #090b6f85;
+}
+@media (max-width: 980px) {
+  .box-form {
+    flex-flow: wrap;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+.box-form div {
+  height: auto;
+}
+.box-form .left {
+  color: #FFFFFF;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("./images/loginburger.jpg");
+  overflow: hidden;
+}
+.box-form .left .overlay {
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  background: #5961f9ad;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.box-form .left .overlay h1 {
+  font-size: 10vmax;
+  line-height: 1;
+  font-weight: 900;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.box-form .left .overlay span p {
+  margin-top: 30px;
+  font-weight: 900;
+}
+.box-form .left .overlay span a {
+  background: #3b5998;
+  color: #FFFFFF;
+  margin-top: 10px;
+  padding: 14px 50px;
+  border-radius: 100px;
+  display: inline-block;
+  box-shadow: 0 3px 6px 1px #042d4657;
+}
+.box-form .left .overlay span a:last-child {
+  background: #1dcaff;
+  margin-left: 30px;
+}
+.box-form .right {
+  padding: 40px;
+  overflow: hidden;
+}
+@media (max-width: 980px) {
+  .box-form .right {
+    width: 100%;
+  }
+}
+.box-form .right h5 {
+  font-size: 6vmax;
+  line-height: 0;
+}
+.box-form .right p {
+  font-size: 14px;
+  color: #B0B3B9;
+}
+.box-form .right .inputs {
+  overflow: hidden;
+}
+.box-form .right input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 25px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #B0B3B9;
+}
+.box-form .right .remember-me--forget-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box-form .right .remember-me--forget-password input {
+  margin: 0;
+  margin-right: 7px;
+  width: auto;
+}
+.box-form .right .login{
+  float: right;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 35px;
+  border-radius: 50px;
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  box-shadow: 0px 4px 20px 0px #49c628a6;
+  background-image: linear-gradient(135deg, #70F570 10%, #49C628 100%);
+}
+
+ .logins label {
+  display: block;
+  position: relative;
+  margin-left: 30px;
+}
+
+.logins label::before {
+  content: ' \f00c';
+  position: absolute;
+  font-family: FontAwesome;
+  background: transparent;
+  border: 3px solid #70F570;
+  border-radius: 4px;
+  color: transparent;
+  left: -30px;
+  transition: all 0.2s linear;
+}
+
+.logins label:hover::before {
+  font-family: FontAwesome;
+  content: ' \f00c';
+  color: #fff;
+  cursor: pointer;
+  background: #70F570;
+}
+
+.logins label:hover::before .text-checkbox {
+  background: #70F570;
+}
+
+.logins label span.text-checkbox {
+  display: inline-block;
+  height: auto;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+
+.logins label input[type="checkbox"] {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
