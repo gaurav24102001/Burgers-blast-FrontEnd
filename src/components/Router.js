@@ -2,54 +2,24 @@ import React from 'react';
 import App from './App';
 import NotFound from './NotFound';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './Home';
+import Signup from './auth/Signup';
 import Restaurant from './Restaurant';
 import { Component } from 'react';
-import axios from 'axios';
+import { auth } from '../firebase';
+import { Redirect } from 'react-router-dom';
+import Login from './auth/Login';
 
 class Router extends Component {
   constructor() {
     super();
 
     this.state = {
-      loggedInStatus: 'NOT_LOGGED_IN',
+      loggedInStatus: '',
       user: {},
     };
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  checkLoginStatus() {
-    axios
-      .get('http://localhost:3000/api/v1/loggedin', { withCredentials: true })
-      .then((response) => {
-        if (
-          response.data.logged_in &&
-          this.state.loggedInStatus === 'NOT_LOGGED_IN'
-        ) {
-          console.log(response.data.logged_in);
-          this.setState({
-            loggedInStatus: 'LOGGED_IN',
-            user: response.data.user,
-          });
-        } else if (
-          !response.data.logged_in &
-          (this.state.loggedInStatus === 'LOGGED_IN')
-        ) {
-          this.setState({
-            loggedInStatus: 'NOT_LOGGED_IN',
-            user: {},
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('check login error', error);
-      });
-  }
-
-  componentDidMount() {
-    this.checkLoginStatus();
   }
 
   handleLogout() {
@@ -62,9 +32,22 @@ class Router extends Component {
   handleLogin(data) {
     this.setState({
       loggedInStatus: 'LOGGED_IN',
-      user: data.user,
+      user: data,
+    });
+    
+
+  }
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        this.setState({ loggedInStatus: 'NOT_LOGGED_IN' });
+      }
+      if (user) {
+        this.setState({ loggedInStatus: 'LOGGED_IN' });
+      }
     });
   }
+
   render() {
     return (
       <BrowserRouter>
@@ -73,7 +56,19 @@ class Router extends Component {
             exact
             path="/"
             render={(props) => (
-              <Home
+              <Login
+                {...props}
+                handleLogin={this.handleLogin}
+                handleLogout={this.handleLogout}
+                loggedInStatus={this.state.loggedInStatus}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={(props) => (
+              <Signup
                 {...props}
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout}
@@ -88,6 +83,7 @@ class Router extends Component {
               <Restaurant
                 {...props}
                 loggedInStatus={this.state.loggedInStatus}
+                user={this.state.user}
                 name={this.state.user}
               />
             )}

@@ -18,6 +18,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.8rem;
+  height:100%;
 }
 * {
   box-sizing: border-box;
@@ -290,8 +291,12 @@ h3 {
 
 .body
 {
-  background: url("images/BURGER BLAST.jpg") center no-repeat ;
- background-size: contain;                                                
+  background: url("images/BURGER BLAST.jpg") center ;
+min-height: 110vh;
+min-width: 1000wh; 
+height:auto;
+
+                                         
   
   color: #fff;
 }
@@ -347,7 +352,7 @@ header.top .header-content h1 {
   color:rgb(235, 242, 19);
   font-weight: bolder;
   display:block;
-  background-color: #4f4b4b;
+  
   padding:20px;
   border-radius: 15%;
 }

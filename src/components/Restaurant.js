@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { auth } from '../firebase';
 import Header from './Header';
 
 class Restaurant extends React.Component {
@@ -34,10 +33,8 @@ class Restaurant extends React.Component {
   render() {
     return (
       <div className='body' >
-        {this.props.loggedInStatus==="NOT_LOGGED_IN" ? { } :
-        
+        {this.props.loggedInStatus==="NOT_LOGGED_IN" ? {}:
 
-      
       <header className='top' >
             <div className='header-content'>
                 <div className='header-rating'>
@@ -56,6 +53,8 @@ class Restaurant extends React.Component {
             onClick={this.displayList}
             className="restaurant_select_top-header font-effect-outline"
           >
+
+            
             {this.state.title ? this.state.title : 'Choose a restaurant'}
           </div>
 
@@ -95,7 +94,8 @@ class Restaurant extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/restaurants')
+ 
+    fetch('http://localhost:3000/api/v1/restaurant')
       .then((response) => response.json())
       .then((data) => {
         this.setState({
