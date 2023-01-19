@@ -1,6 +1,7 @@
 import React from 'react';
 import { auth } from '../firebase';
 import Header from './Header';
+import Headers from './Headers';
 
 class Restaurant extends React.Component {
   state = {
@@ -8,6 +9,7 @@ class Restaurant extends React.Component {
     display: false,
     title: '',
     url: '',
+    id:''
   };
 
   displayList = () => {
@@ -21,21 +23,33 @@ class Restaurant extends React.Component {
     // const title = restaurant.title;
     // const url - restaurant.url;
     // ya to line no 17 jaise likh lo ya to line no. 18+19 jaise.
-    this.setState({ title, url, display: false });
+    this.setState({ title, url, display: false, id:restaurant.id });
   };
 
   goToRestaurant = () => {
     const { url } = this.state;
 
     this.props.history.push(`/restaurant/${url}`);
+    this.props.restaurant_id = this.state.id;
   };
 
   render() {
+    if(this.props.loggedInStatus==="NOT_LOGGED_IN")
+    {
+      this.props.history.push("/");
+    }
     return (
+      <div>
+      <Headers login={this.props.loggedInStatus} count={this.props.count} history = {this.props.history}/>
       <div className='body' >
         {this.props.loggedInStatus==="NOT_LOGGED_IN" ? {}:
+        
+     
+    
 
       <header className='top' >
+      
+        
             <div className='header-content'>
                 <div className='header-rating'>
                   <div className='header-rating_tag'>Rating:</div>
@@ -82,12 +96,14 @@ class Restaurant extends React.Component {
         ) : null}
 
         {this.state.title && !this.state.display ? (
-          <button onClick={this.goToRestaurant}> Go to the restaurant</button>
+          <button onClick={this.goToRestaurant} className="button"> Go to the restaurant</button>
         ) : null}
       </div>
       </div>
           </header>
+          
   }
+          </div>
           </div>
 
     );
@@ -95,7 +111,7 @@ class Restaurant extends React.Component {
 
   componentDidMount() {
  
-    fetch('http://localhost:3000/api/v1/restaurant')
+    fetch('https://burgerblast-pern-production.up.railway.app/api/v1/restaurant')
       .then((response) => response.json())
       .then((data) => {
         this.setState({

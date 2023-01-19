@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import Headers from './../Headers';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Signup extends Component {
       password_confirmation: '',
       mobile_no: '',
       Errors: '',
+      dis: 'False',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,38 +25,49 @@ export default class Signup extends Component {
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
-      Errors:""
+      Errors: '',
     });
   }
 
   handleSubmit(event) {
     const { name, email, password, password_confirmation, mobile_no } =
       this.state;
-      if(!name || !email || !password || !password_confirmation || !mobile_no)
-      {
-        this.setState({Errors:"Please fill all field"})
-        return;
-      }
+    if (!name || !email || !password || !password_confirmation || !mobile_no) {
+      this.setState({ Errors: 'Please fill all field' });
+      return;
+    }
     if (password !== password_confirmation) {
-      this.setState({Errors:"PASSWORD AND PASSWORD CONFIRMATION NOT MATCH"})
+      this.setState({ Errors: 'PASSWORD AND PASSWORD CONFIRMATION NOT MATCH' });
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
           axios
-            .post('http://localhost:3000/api/v1/users', {
-              user: {
-                name: name,
-                email: email,
-                mobile_no: mobile_no,
-              },
-            })
+            .post(
+              'https://burgerblast-pern-production.up.railway.app/api/v1/users',
+              {
+                user: {
+                  name: name,
+                  email: email,
+                  mobile_no: mobile_no,
+                },
+              }
+            )
             .then((res) => {
-              this.handleSuccessfulAuth(res);
+              let userr = {
+                name: `${this.state.name}`,
+                email: `${this.state.email}`,
+                mobile_no: `${this.state.mobile_no}`,
+              };
+              console.log(userr, 'signup');
+              this.props.setusersignup(userr);
+              this.props.history.push('/restaurant');
             })
             .catch((error) => console.log(error));
         })
-        .catch((error)=>{this.setState({Errors:error.message})
-    console.log("error...",this.state.Errors)})
+        .catch((error) => {
+          this.setState({ Errors: error.message });
+          console.log('error...', this.state.Errors);
+        });
 
       event.preventDefault();
     }
@@ -71,21 +84,14 @@ export default class Signup extends Component {
       }
     );
   }
-  handleSuccessfulAuth(user) {
-    this.props.history.push('/restaurant');
-
-    this.props.handleLogin(user.data);
-  }
-
   render() {
     return (
       <div>
-        <div Style="background-color:Black ;padding:10px ; color:white; max-height:10vh ">
-          <span Style="margin-left:30%">WELCOME TO BURGER BLAST </span>
-          <span Style="float:right">
-            <button onClick={this.handleLogoutClick}> LOGOUT </button>
-          </span>
-        </div>
+        <Headers
+          login={this.props.loggedInStatus}
+          count={this.props.count}
+          history={this.props.history}
+        />
 
         <body className="login">
           <div class="box-form">
@@ -146,10 +152,10 @@ export default class Signup extends Component {
               </div>
 
               <div Style="color:red">
-      {this.state.Errors}
-			<br/>
-      <br/>
-      </div>
+                {this.state.Errors}
+                <br />
+                <br />
+              </div>
 
               <div class="remember-me--forget-password">
                 <span className="logins">
@@ -161,12 +167,20 @@ export default class Signup extends Component {
               </div>
 
               <br />
-              <button
-                className="login"
-                onClick={(event) => this.handleSubmit(event)}
-              >
-                Signup
-              </button>
+
+              {this.props.loggedInStatus === 'LOGGED_IN' ? (
+                <button className="login" Style="cursor: not-allowed;">
+                  Signup
+                </button>
+              ) : (
+                <button
+                  className="login "
+                  onClick={(event) => this.handleSubmit(event)}
+                  Style="cursor:pointer"
+                >
+                  Signup
+                </button>
+              )}
             </div>
           </div>
         </body>

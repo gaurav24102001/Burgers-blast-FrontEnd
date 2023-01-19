@@ -1,6 +1,6 @@
 
-export function FetchBurgers(restid) {
-  return fetch(`http://localhost:3000/api/v1/restaurants/${restid}/burgers`).then(
+export function FetchBurgers(restURL) {
+  return fetch(`https://burgerblast-pern-production.up.railway.app/api/v1/restaurant/${restURL}/burgers`).then(
     (response) => response.json()
   );
 }
@@ -15,7 +15,7 @@ export function FetchBurgers(restid) {
       'Content-Type': 'application/json',
     },
   };
-  return fetch(`http://localhost:3000/api/v1/restaurants/${restid}/burgers`, request).then(
+  return fetch(`https://burgerblast-pern-production.up.railway.app/api/v1/restaurants/${restid}/burgers`, request).then(
     (response) => response.json()
   );
 }
